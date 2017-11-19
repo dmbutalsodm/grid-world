@@ -59,6 +59,21 @@ public class World {
 		printWorld();
 	}
 
+	public Occupant getTargetNeighbor(int[] currPos, String facingDirection) {
+		switch(facingDirection) {
+			case "down":
+				return cells[currPos[0]+1][currPos[1]].getOccupant();
+			case "up":
+				return cells[currPos[0]-1][currPos[1]].getOccupant();
+			case "left":
+				return cells[currPos[0]][currPos[1]-1].getOccupant();
+			case "right":
+				return cells[currPos[0]][currPos[1]+1].getOccupant();
+			default: 
+				return null;
+		}
+	}
+
 	public static void main(String[] args) {
 		World mainland = new World(10, 5);
 		PlayerCharacter pc = new PlayerCharacter(mainland);

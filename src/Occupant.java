@@ -1,4 +1,4 @@
-public class Occupant {
+public class Occupant implements OccupantInterface {
     private String displayCharacter;
     private World world;
     private int[] pos;
@@ -37,4 +37,8 @@ public class Occupant {
     public String getDisplayCharacter() {
         return this.displayCharacter;
     }
+
+	public void use(PlayerCharacter pc) {
+		throw new UnsupportedOperationException("Something went terribly wrong.");
+	}
 }
