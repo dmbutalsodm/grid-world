@@ -1,4 +1,7 @@
+package world;
+
 import java.util.Scanner;
+import occupants.Occupant;
 
 public class World {
 	private Cell[][] cells;
@@ -34,11 +37,11 @@ public class World {
 	
 	public boolean move(int[] oldPos, int[] newPos) {
 		if(newPos[0] > this.height-1 || newPos[1] > this.width-1 || newPos[0] < 0 || newPos[1] < 0) {
-			NotificationMessage.setMessage("You bumped into a wall.");
+			misc.NotificationMessage.setMessage("You bumped into a wall.");
 			return false;
 		}
 		if(cells[newPos[0]][newPos[1]].getOccupant() != null) {
-			NotificationMessage.setMessage("You bumped into a " + cells[newPos[0]][newPos[1]].getOccupant().getObjectName() + ".");
+			misc.NotificationMessage.setMessage("You bumped into a " + cells[newPos[0]][newPos[1]].getOccupant().getObjectName() + ".");
 			return false;
 		}
 		cells[newPos[0]][newPos[1]].setOccupant(cells[oldPos[0]][oldPos[1]].getOccupant());
@@ -46,8 +49,8 @@ public class World {
 		return true;
 	}
 
-	public void spawn(Occupant occupant, int[] pos) {
-		cells[pos[0]][pos[1]].setOccupant(occupant);
+	public void spawn(occupants.Occupant occupant, int[] pos) {
+		cells[pos[1]][pos[0]].setOccupant(occupant);
 		occupant.setPosition(pos);
 	}
 
@@ -55,11 +58,11 @@ public class World {
 		String str = "";
 		for(int i = 0 ; i < 50 ; i++) str += "\n";
 		System.out.println(str);
-		System.out.println(NotificationMessage.getMessage());
+		System.out.println(misc.NotificationMessage.getMessage());
 		printWorld();
 	}
 
-	public Occupant getTargetNeighbor(int[] currPos, String facingDirection) {
+	public occupants.Occupant getFacingNeighbor(int[] currPos, String facingDirection) {
 		switch(facingDirection) {
 			case "down":
 				return cells[currPos[0]+1][currPos[1]].getOccupant();
@@ -76,9 +79,10 @@ public class World {
 
 	public static void main(String[] args) {
 		World mainland = new World(10, 5);
-		PlayerCharacter pc = new PlayerCharacter(mainland);
+		occupants.PlayerCharacter pc = new occupants.PlayerCharacter(mainland);
 		mainland.spawn(pc, new int[] {0, 0});
-		mainland.spawn(new Chest(mainland), new int[] {3, 5});
+		items.Item[] items = new items.Item[] {new items.Item("knife"), new items.Item("box"), new items.Item("picture")};
+		mainland.spawn(new occupants.Chest(mainland, items), new int[] {3, 4});
 		mainland.printWorld();
 		Scanner reader = new Scanner(System.in);
 		while (true) {

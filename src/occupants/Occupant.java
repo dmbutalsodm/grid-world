@@ -1,10 +1,12 @@
-public class Occupant implements OccupantInterface {
-    private String displayCharacter;
-    private World world;
-    private int[] pos;
-    private String objectName = "mystery occupant";
+package occupants;
 
-    public Occupant(String display, World world) {
+public abstract class Occupant {
+    private String displayCharacter;
+    private world.World world;
+    private int[] pos;
+    public abstract String getObjectName();
+
+    public Occupant(String display, world.World world) {
         this.displayCharacter = display;
         this.world = world;
     }
@@ -17,10 +19,6 @@ public class Occupant implements OccupantInterface {
         this.displayCharacter = character;
     }
     
-	public String getObjectName() {
-		return objectName;
-	}
-
     public int[] getPosition() {
         return this.pos;
     }

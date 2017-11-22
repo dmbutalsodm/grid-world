@@ -1,3 +1,5 @@
+package misc;
+
 public class NotificationMessage {
     private static String message;
 

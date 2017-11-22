@@ -1,5 +1,9 @@
+package world;
+
+import occupants.Occupant;
+
 public class Cell {
-	private Occupant occupant;
+	private occupants.Occupant occupant;
 
 	public Cell() {
 	}

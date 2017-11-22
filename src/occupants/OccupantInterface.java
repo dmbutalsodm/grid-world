@@ -1,3 +1,5 @@
+package occupants;
+
 interface OccupantInterface {
     public String getObjectName();
     public int[] getPosition();
